@@ -33,7 +33,7 @@ p {
 p > span > a {
   display: block;
   width: 450px;
-  max-width: 98%;
+  max-width: 90%;
   background-color: black;
   color: white;
   font-family: monospace;
@@ -47,7 +47,7 @@ p > span > a {
 p > span {
   display: block;
   position: absolute;
-  width: 95%;
+  width: 100%;
 }
 
 p > a:target {
@@ -136,7 +136,7 @@ p a u {
 }
 
 b a:nth-child(1)::after {
-  content: "⬅️";
+  content: "<";
 }
 
 b a:nth-child(2)::after {
