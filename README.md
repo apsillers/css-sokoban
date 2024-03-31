@@ -46,4 +46,6 @@ Level strings can have spaces, which are completely ignored and removed before a
 
 * This code renders the full text of each state in each HTML element. For games with a high volume of repeated rows of large length, it would be possible to render (some or all) rows of each state as elements with a `content` CSS rule. As a trivial example, if each state always started with `#####`, then a CSS rule could say `.state-elem::before { content: "#####"; }` and then omit the text in the HTML. This only works efficiently if the selector can be expressed more efficiently than simply repeating the text.
 
+* This MIGHT be able to render a real-time game like Snake by using CSS animations. Each state would actually be a stack of states, which are progressively stripped away over time.
+
 * I always thought it would be cool to do Sokoban with portals. Somebody should do Sokoban with portals in it.

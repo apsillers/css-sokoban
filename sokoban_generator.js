@@ -110,6 +110,31 @@ b a {
   font-size: 30pt;
 }
 
+p a i {
+	color: #78F;
+	font-style: normal;
+}
+
+p a s {
+	color: #4F4;
+	text-decoration: none;
+}
+
+p a strong {
+	color: yellow;
+	font-style: normal;
+}
+
+p a em {
+	color: red;
+	font-style: normal;
+}
+
+p a u {
+	color: #F4F;
+	text-decoration: none;
+}
+
 b a:nth-child(1)::after {
   content: "<";
 }
@@ -132,7 +157,7 @@ b a:nth-child(4)::after {
 
 
 var levelStartMsgs = [
-"Welcome to Nethack, {y/n}! You are @, chaotic halfling wizard. Use arrow buttons to get around the walls (#) to the stairs (>).",
+"Welcome to Nethack, {y/n}! You are @, chaotic halfling wizard. Click arrows below to get around the walls (#) to the stairs (>).",
 "Push boulders (0) out of the way to reach the stairs (>). You can't pull boulders. You feel confused!",
 "You feel strong! You (@) showed the boulder (0) who's boss! Boulders (0) can't move into other boulders (0), walls (#), or stairs (>).",
 "You (@) look similar to a boulder (0) but you're actually different entities! Boulders (0) fall into pits (^), you (@) can't!",
@@ -179,7 +204,7 @@ function step(state, width, dX, dY) {
 	if(field[targetPos] == ">") {
 		field = replacePos(field, startPos, ".");
 		field = replacePos(field, targetPos, "@");
-	    return [++level,"You decend the stairs...",field].join("|");
+	    return [++level,"You decend the stairs... (Press any key.)",field].join("|");
 	}
 	// if moving into a wall, don't move
 	if(field[targetPos] == "#") {
@@ -285,7 +310,7 @@ function serializeStates(states, width) {
 		var next = states[state].next;
 		var [l, u, d, r] = next.map(s=>states[s].id.toString(36));
 		
-		field = field.match(new RegExp(".{"+width+"}", "g")).join(" ").replace(">","&gt;");
+		field = field.match(new RegExp(".{"+width+"}", "g")).join(" ").replace(">","<s>&gt;</s>").replace("@","<em>@</em>").replaceAll("$","<strong>$</strong>").replaceAll("^","<u>^</u>").replaceAll("0", "<i>0</i>");
 		//console.log(state.match(new RegExp(".{"+width+"}", "g")).join(" "))
 		html += `<a id=${id} name=${id}>${message.length?"<b>"+message+"</b>":""}<b>${field}</b></a><b><a href=#${l} /><a href=#${d} /><a href=#${u} /><a href=#${r} /></b>`;
 	}
