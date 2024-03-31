@@ -47,7 +47,7 @@ p > span > a {
 p > span {
   display: block;
   position: absolute;
-  width: 99%;
+  width: 95%;
 }
 
 p > a:target {
@@ -136,7 +136,7 @@ p a u {
 }
 
 b a:nth-child(1)::after {
-  content: "<";
+  content: "⬅️";
 }
 
 b a:nth-child(2)::after {
@@ -151,9 +151,10 @@ b a:nth-child(4)::after {
   content: ">";
 }
 </style>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
-<body><p>
-<span><a href="#1">#.0.^.# <u>Click to Begin...</u> #.@.$.# </a></span>`
+<body>
+<p><span><a href="#1">#.0.^.# <u>Click to Begin...</u> #.@.$.# </a></span>`
 
 
 var levelStartMsgs = [
