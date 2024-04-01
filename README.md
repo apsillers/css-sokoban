@@ -90,15 +90,15 @@ It basically works like:
 * But some of those states are duplicates (e.g., stepping back to start after stepping only one space away) so we can skip generating those next states – we already know what all the next states look like from that position.
 * Since Sokoban has finite states, eventually all states will be duplicates we've already seen before, and our process terminates.
 * Finally, we take the dictionary that maps each state to its four next-states and write it out as HTML. Each state is given an ID, and those IDs are used to uniquely identify each state and the target of each link.
-  * I used base 36 (basically, counting each digit through all numbers and letter, from 1 to z) but you could use any system that ensures states IDs are unique within the game
-* Once we have our fully-explored states as HTML, we attach the CSS to make the magic happen!
+  * I used base 36 (basically, counting each digit through all numbers and letters, `0`, `1`, ... `8`, `9`, `a`, `b`, ..., `z`) but you could use any system that ensures state IDs are unique within the game
+* Once we have our fully-explored states as HTML, we attach the CSS to make the `:target` magic happen!
 
 ### I looked at your HTML and the control links don't actually have arrows inside them?
 
-I use CSS `content:` rules to populate the directional links with arrow emojis. The emojis aren't actually inside the HTML, but there's a rule that says "each first directional link always gets a left arrow, each second link gets an up arrow, etc." This saves a lot of space! It was a challenge to make all states of multiple Sokoban levels fit inside the 500,000 character limit of an AO3 work.
+I use CSS `content:` rules to populate the directional links with arrow emojis (or `<v^>` characters). The emojis aren't actually inside the HTML, but there are `:nth-child` rules that says "each first directional link always gets a left arrow," and, "each second link gets an up arrow," etc. This saves a lot of space! It was a challenge to make full enumeration of Sokoban states fit inside the 500,000 character limit of an AO3 work.
 
 ### One more HTML concern: it looks like your directional links aren't actually inside the `<a id="some_id">` that's supposed to be made visible by the `#some_id` URL fragment. Why isn't it in there? How does it still work?
 
 The visibility trick works by matching element `id` to the URL fragment, but AO3 can only attach `id` attributes to `<a>` tags! No other type of element is allowed to have this property under AO3's parser.
 
-This caused a problem: the directional links must be `<a>` tags also, but you can't put one `<a>` element inside of another one. The solution was to use the [CSS next-sibling combinator](https://developer.mozilla.org/en-US/docs/Web/CSS/Next-sibling_combinator) to say, "when you apply visibility rules to an <a> but :target, also apply a visibility rule to the element that comes immediately after it." In this case, that's always the `<b>` element holding the next-state directional links for each state.
+This caused a problem: the directional links must be `<a>` tags also, but you can't put one `<a>` element inside of another one. The solution was to use the [CSS next-sibling combinator](https://developer.mozilla.org/en-US/docs/Web/CSS/Next-sibling_combinator) to say, "when you apply visibility rules to an `<a>` by `:target`, also apply a visibility rule to the element that comes immediately after it." In this case, that's always the `<b>` element holding the next-state directional links for each state.
